@@ -1,0 +1,86 @@
+Tarefa - Crie um projeto de aplicação JavaEE com uma página inicial em HTML apresentando 2 formulários para respostas dinâmicas dos seguintes Servlets:
+
+A) MathServlet, que responda uma página com o resultado de uma operação aritmética (soma, subtração, multiplicação ou divisão) a partir de 2 parãmetros mais 1 parâmetro adicional para a operação.
+
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.*;
+
+public class JavaProgram
+{
+    public static void main(String args[])
+  {
+    int first, second, add, subtract, multiply;
+    float devide;
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.print("Entre com dois números : ");
+    first = scanner.nextInt();
+    second = scanner.nextInt();
+
+    add = first + second;
+    subtract = first - second;
+    multiply = first * second;
+    devide = (float) first / second;
+
+    System.out.println("Soma = " + add);
+    System.out.println("Subtracao = " + subtract);
+    System.out.println("Multiplicacao = " + multiply);
+    System.out.println("Divisao = " + devide);
+  }
+}
+
+
+B) RandomServlet, que responda uma página com uma tabela de N números aleatórios conforme parâmetro informado pelo usuário.
+
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.*;
+
+public class randomNumberServlet extends HttpServlet {
+
+protected void processRequest(HttpServletRequest request,
+ HttpServletResponse response)throws ServletException, IOException 
+{
+ response.setContentType("text/html;charset=UTF-8");
+ PrintWriter out = response.getWriter();
+try {
+
+out.println("<html>");
+out.println("<head>");
+out.println("<title>" + getServletInfo() + "</title>");
+out.println("</head>");
+out.println("<body>");
+out.println("<h1>Servlet randomNumberServlet at " 
+	   + request.getContextPath() + "</h1>");
+out.println(" <form name=\"form\" action=\
+             "randomNumberServlet\" method=\"POST\">");
+out.println("<BR><input type=\"submit\
+                " value=\"Generate Random Number\" />");
+out.println("</form>");
+out.println("</body>");
+out.println("</html>");
+} finally {
+out.close();
+}
+
+List<Integer> numbers = new ArrayList<Integer>();
+for (int i = 0; i < 9; i++) {
+numbers.add(i);
+}
+Collections.shuffle(numbers);
+out.print(" Method-1: Os numeros aleatorios sao: ");
+for (int j = 0; j < 6; j++) {
+out.println("<b>" + numbers.get(j) + "</b>" + " ");
+}
+
